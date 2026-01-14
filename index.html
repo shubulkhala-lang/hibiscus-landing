@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hibiscus Hair Oil</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+}
+
+.container {
+  max-width: 650px;
+  margin: auto;
+  padding: 15px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+h1, h2 {
+  text-align: center;
+  color: #d81b60;
+}
+
+p {
+  color: #444;
+  line-height: 1.6;
+}
+
+.hero-img {
+  width: 100%;
+  border-radius: 16px;
+  margin-top: 10px;
+}
+
+button {
+  background: linear-gradient(135deg, #e91e63, #ff4081);
+  color: white;
+  padding: 14px;
+  border: none;
+  width: 100%;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+ul {
+  padding-left: 18px;
+}
+
+.badge {
+  background: #ffe3ed;
+  padding: 10px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+  color: #c2185b;
+}
+
+#msg {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="card">
+  <h1>🌺 Hibiscus Hair Oil</h1>
+  <p style="text-align:center;">চুল পড়া কমান, নতুন চুল গজান প্রাকৃতিকভাবে</p>
+
+  <img src="https://i.imgur.com/U9QZ6mH.jpg" class="hero-img">
+
+  <br>
+  <button onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">
+    এখনই অর্ডার করুন
+  </button>
+</div>
+
+<!-- PROBLEM -->
+<div class="card">
+<h2>আপনার কি এসব সমস্যা আছে?</h2>
+<ul>
+  <li>❌ অতিরিক্ত চুল পড়া</li>
+  <li>❌ চুল পাতলা হয়ে যাওয়া</li>
+  <li>❌ খুশকি সমস্যা</li>
+  <li>❌ চুল রুক্ষ ও প্রাণহীন</li>
+</ul>
+</div>
+
+<!-- BENEFITS -->
+<div class="card">
+<h2>আমাদের তেলের উপকারিতা</h2>
+<ul>
+  <li>✅ চুল পড়া কমায়</li>
+  <li>✅ নতুন চুল গজাতে সাহায্য করে</li>
+  <li>✅ স্ক্যাল্প পুষ্টি দেয়</li>
+  <li>✅ সম্পূর্ণ হারবাল উপাদান</li>
+</ul>
+</div>
+
+<!-- PRICE -->
+<div class="card">
+<h2>আজকের বিশেষ অফার 🎁</h2>
+<p class="badge">আগের দাম 950৳ → এখন মাত্র 650৳</p>
+<p style="text-align:center;">🚚 সারা বাংলাদেশে ফ্রি হোম ডেলিভারি</p>
+</div>
+
+<!-- ORDER FORM -->
+<div class="card" id="order">
+<h2>অর্ডার ফর্ম</h2>
+
+<input id="name" placeholder="আপনার নাম">
+<input id="phone" placeholder="মোবাইল নাম্বার">
+<textarea id="address" placeholder="সম্পূর্ণ ঠিকানা"></textarea>
+
+<select id="quantity">
+  <option value="">পরিমাণ নির্বাচন করুন</option>
+  <option>১ বোতল</option>
+  <option>২ বোতল</option>
+  <option>৩ বোতল</option>
+</select>
+
+<button onclick="sendOrder()">Confirm Order</button>
+
+<p id="msg"></p>
+</div>
+
+</div>
+
+<script>
+function sendOrder(){
+
+  var name = document.getElementById("name").value;
+  var phone = document.getElementById("phone").value;
+  var address = document.getElementById("address").value;
+  var quantity = document.getElementById("quantity").value;
+
+  if(!name || !phone || !address || !quantity){
+    document.getElementById("msg").style.color = "red";
+    document.getElementById("msg").innerHTML = "সব তথ্য পূরণ করুন ❌";
+    return;
+  }
+
+  var data = { name, phone, address, quantity };
+
+  fetch("https://script.google.com/macros/s/AKfycby0cb8EqY1vSqVPAlO0kJNkQ3LAAGKZl4jGZVHg1dz8PTXWvWl2YFtjA-1kObkRencq/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(r => {
+    document.getElementById("msg").style.color = "green";
+    document.getElementById("msg").innerHTML = "✅ অর্ডার সফল হয়েছে!";
+    
+    document.getElementById("name").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("address").value = "";
+    document.getElementById("quantity").value = "";
+  })
+  .catch(err => {
+    document.getElementById("msg").style.color = "red";
+    document.getElementById("msg").innerHTML = "❌ সমস্যা হয়েছে, আবার চেষ্টা করুন";
+  });
+}
+</script>
+
+</body>
+</html>
